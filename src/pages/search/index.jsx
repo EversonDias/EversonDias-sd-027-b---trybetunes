@@ -9,18 +9,22 @@ export default class Search extends Component {
     super();
     this.state = {
       isDisabled: true,
-      search: '',
+      input: '',
+      fetchedArtist: '',
       loading: false,
       artist: '',
+      isMessage: false,
     };
     this.handleOnChangeInput = this.handleOnChangeInput.bind(this);
     this.handleOnClickButton = this.handleOnClickButton.bind(this);
+    this.title = this.title.bind(this);
   }
 
   handleOnChangeInput(input) {
     const { target: { value } } = input;
     this.setState({
-      search: [value],
+      input: value,
+      fetchedArtist: value,
     });
     const minCharacters = 2;
     if (value.length >= minCharacters) {
@@ -35,21 +39,44 @@ export default class Search extends Component {
   }
 
   async handleOnClickButton() {
+    const { fetchedArtist } = this.state;
     this.setState({
-      search: '',
+      input: '',
       loading: true,
+      isMessage: true,
     });
-    const artistName = await searchAlbumsApi();
+    const artistName = await searchAlbumsApi(fetchedArtist);
     this.setState({
       loading: false,
       artist: [...artistName],
     });
   }
 
-  render() {
-    const { isDisabled, search, loading, artist } = this.state;
-    console.log(artist);
+  title() {
+    const { fetchedArtist, artist, loading } = this.state;
+    const ONE = 1;
     const message = <p>Nenhum álbum foi encontrado</p>;
+    const messageErro = loading === false && artist.length < ONE;
+    return (
+      <div>
+        <p>
+          {`Resultado de álbuns de: ${fetchedArtist}`}
+        </p>
+        {messageErro && message}
+        {!loading && <CardAlbum
+          artist={ artist }
+        />}
+      </div>
+    );
+  }
+
+  render() {
+    const {
+      isDisabled,
+      input,
+      loading,
+      isMessage,
+    } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
@@ -57,7 +84,7 @@ export default class Search extends Component {
           <input
             type="text"
             data-testid="search-artist-input"
-            value={ search }
+            value={ input }
             onChange={ this.handleOnChangeInput }
           />
           <button
@@ -69,8 +96,8 @@ export default class Search extends Component {
             Pesquisar
           </button>
         </form>
-        {loading && <Loading />}
-        {artist.length < 1 ? message : <CardAlbum artist={ artist } />}
+        {isMessage && this.title()}
+        {loading && <Loading /> }
       </div>
     );
   }

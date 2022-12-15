@@ -4,23 +4,23 @@ import PropTypes from 'prop-types';
 
 export default class CardAlbum extends Component {
   render() {
-    const { artist } = this.props;
+    const {
+      artist,
+    } = this.props;
     return (
-      <div>
-        <p>Resultado de álbuns de:</p>
-        {artist.map(({ artistName, collectionId }) => (
+      <>
+        {artist.map(({ collectionId, collectionName }) => (
           <Link
             key={ collectionId }
             to={ `/album/${collectionId}` }
+            data-testid={ `link-to-album-${collectionId}` }
           >
-            <div
-              data-testid={ `link-to-album-${collectionId}` }
-            >
-              { artistName }
+            <div>
+              {collectionName}
             </div>
           </Link>
         ))}
-      </div>
+      </>
     );
   }
 }
