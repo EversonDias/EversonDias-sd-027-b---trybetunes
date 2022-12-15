@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class MusicCard extends Component {
   render() {
     const {
       previewUrl,
+      name,
     } = this.props;
     return (
       <div>
+        <p>{ name }</p>
         <audio
           data-testid="audio-component"
           src={ previewUrl }
@@ -22,3 +25,8 @@ export default class MusicCard extends Component {
     );
   }
 }
+
+MusicCard.propTypes = {
+  previewUrl: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};

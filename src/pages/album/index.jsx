@@ -18,17 +18,14 @@ export default class Album extends Component {
   }
 
   componentDidMount() {
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props;
+    const { match } = this.props;
+    const { params: { id } } = match;
     this.handleGetMusics(id);
   }
 
   async handleGetMusics(id) {
     const musics = await getMusics(id);
-    console.log(musics);
+    console.log(musics[1]);
     const { artistName, collectionName } = musics[0];
     this.setState({
       artistName,
@@ -48,10 +45,11 @@ export default class Album extends Component {
         <Header />
         <p data-testid="artist-name">{ artistName }</p>
         <p data-testid="album-name">{ collectionName }</p>
-        {listMusic.map(({ trackViewUrl, trackId }, index) => (
+        {listMusic.map(({ previewUrl, trackId, trackName }, index) => (
           index > 0 && <MusicCard
             key={ trackId }
-            previewUrl={ trackViewUrl }
+            previewUrl={ previewUrl }
+            name={ trackName }
           />
         ))}
       </div>
