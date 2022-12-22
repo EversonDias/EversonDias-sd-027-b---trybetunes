@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header from '../../components/header';
 import getMusics from '../../services/musicsAPI';
 import MusicCard from '../../components/musicCard';
+import { addSong } from '../../services/favoriteSongsAPI';
+import Loading from '../../components/loading';
 
 export default class Album extends Component {
   constructor() {
@@ -12,9 +14,11 @@ export default class Album extends Component {
       artistName: '',
       collectionName: '',
       listMusic: [],
+      loading: false,
     };
 
     this.handleGetMusics = this.handleGetMusics.bind(this);
+    this.handleAddFavorite = this.handleAddFavorite.bind(this);
   }
 
   componentDidMount() {
@@ -33,22 +37,40 @@ export default class Album extends Component {
     });
   }
 
+  async handleAddFavorite({ target: { id, checked } }) {
+    this.setState({
+      loading: true,
+    });
+    const { listMusic } = this.state;
+    if (checked) {
+      const favoriteSong = listMusic.filter(({ trackId }) => trackId === Number(id));
+      await addSong(favoriteSong);
+    }
+    this.setState({
+      loading: false,
+    });
+  }
+
   render() {
     const {
       artistName,
       collectionName,
       listMusic,
+      loading,
     } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
         <p data-testid="artist-name">{ artistName }</p>
+        {loading && <Loading /> }
         <p data-testid="album-name">{ collectionName }</p>
         {listMusic.map(({ previewUrl, trackId, trackName }, index) => (
           index > 0 && <MusicCard
             key={ trackId }
+            trackId={ trackId }
             previewUrl={ previewUrl }
             name={ trackName }
+            AddFavorite={ this.handleAddFavorite }
           />
         ))}
       </div>

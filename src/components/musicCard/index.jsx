@@ -6,6 +6,8 @@ export default class MusicCard extends Component {
     const {
       previewUrl,
       name,
+      trackId,
+      AddFavorite,
     } = this.props;
     return (
       <div>
@@ -21,6 +23,16 @@ export default class MusicCard extends Component {
             audio
           </code>
         </audio>
+        <label htmlFor={ trackId }>
+          Favorita
+          <input
+            data-testid={ `checkbox-music-${trackId}` }
+            type="checkbox"
+            onChange={ AddFavorite }
+            name=""
+            id={ trackId }
+          />
+        </label>
       </div>
     );
   }
@@ -29,4 +41,6 @@ export default class MusicCard extends Component {
 MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  trackId: PropTypes.number.isRequired,
+  AddFavorite: PropTypes.func.isRequired,
 };
