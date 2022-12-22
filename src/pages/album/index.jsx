@@ -25,7 +25,6 @@ export default class Album extends Component {
 
   async handleGetMusics(id) {
     const musics = await getMusics(id);
-    console.log(musics[1]);
     const { artistName, collectionName } = musics[0];
     this.setState({
       artistName,
@@ -58,9 +57,5 @@ export default class Album extends Component {
 }
 
 Album.propTypes = {
-  match: PropTypes.objectOf(
-    PropTypes.objectOf(
-      PropTypes.string,
-    ),
-  ).isRequired,
+  match: PropTypes.object.isRequired,
 };

@@ -5,7 +5,8 @@ import Search from './pages/search';
 import Album from './pages/album';
 import Favorites from './pages/favorites';
 import NotFound from './pages/notFound';
-import Profile from './pages/profile';
+import Profile from './pages/profile/index';
+import Edit from './pages/profile/edit/index';
 
 class App extends React.Component {
   render() {
@@ -15,10 +16,13 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={ Login } />
             <Route path="/search" component={ Search } />
-            <Route path="/album/:id" component={ Album } />
-            <Route path="/favorites" component={ Favorites } />
-            <Route path="/notFound" component={ NotFound } />
-            <Route path="/profile" component={ Profile } />
+            <Route exact path="/album/:id" component={ Album } />
+            <Route exact path="/favorites" component={ Favorites } />
+            <Route exact path="/notFound" component={ NotFound } />
+            <Route exact path="/profile" component={ Profile } />
+            <Route exact path="/profile/edit" component={ Edit } />
+
+            <Route path="*" component={ NotFound } />
           </Switch>
         </BrowserRouter>
       </main>
