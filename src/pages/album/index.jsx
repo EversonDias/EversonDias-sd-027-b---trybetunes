@@ -38,10 +38,6 @@ export default class Album extends Component {
     });
   }
 
-  componentDidUpdate() {
-    // this.handleGetSong();
-  }
-
   async handleGetSong() {
     const listFavorite = await getFavoriteSongs();
     const songFavorite = listFavorite.flatMap((song) => song);
@@ -67,8 +63,8 @@ export default class Album extends Component {
     const { listMusic } = this.state;
     if (checked) {
       const favoriteSong = listMusic.filter(({ trackId }) => trackId === Number(id));
-      console.log(favoriteSong);
       await addSong(favoriteSong);
+      await this.handleGetSong();
     }
     this.setState({
       loading: false,
