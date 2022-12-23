@@ -4,7 +4,7 @@ import Header from '../../components/header';
 import getMusics from '../../services/musicsAPI';
 import MusicCard from '../../components/musicCard';
 import Loading from '../../components/loading';
-import { addSong, getFavoriteSongs } from '../../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../../services/favoriteSongsAPI';
 
 export default class Album extends Component {
   constructor() {
@@ -30,12 +30,12 @@ export default class Album extends Component {
     const { match } = this.props;
     const { params: { id } } = match;
     this.handleGetMusics(id);
-    this.setState({
-      loading: true,
-    });
-    this.setState({
-      loading: false,
-    });
+    // this.setState({
+    //   loading: true,
+    // });
+    // this.setState({
+    //   loading: false,
+    // });
   }
 
   async handleGetSong() {
@@ -60,12 +60,17 @@ export default class Album extends Component {
     this.setState({
       loading: true,
     });
-    const { listMusic } = this.state;
+    const { listMusic, listSongFavorite } = this.state;
     if (checked) {
-      const favoriteSong = listMusic.filter(({ trackId }) => trackId === Number(id));
-      await addSong(favoriteSong);
-      await this.handleGetSong();
+      const listFavorite = listMusic.filter(({ trackId }) => trackId === Number(id));
+      await addSong(listFavorite[0]);
+    } else {
+      const listFavorite = listSongFavorite.filter(({ trackId }) => (
+        trackId === Number(id)
+      ));
+      await removeSong(listFavorite[0]);
     }
+    await this.handleGetSong();
     this.setState({
       loading: false,
     });
