@@ -22,20 +22,10 @@ export default class Album extends Component {
     this.handleAddFavorite = this.handleAddFavorite.bind(this);
   }
 
-  componentWillMount() {
-    this.handleGetSong();
-  }
-
   componentDidMount() {
     const { match } = this.props;
     const { params: { id } } = match;
     this.handleGetMusics(id);
-    // this.setState({
-    //   loading: true,
-    // });
-    // this.setState({
-    //   loading: false,
-    // });
   }
 
   async handleGetSong() {
@@ -77,6 +67,7 @@ export default class Album extends Component {
   }
 
   render() {
+    this.handleGetSong();
     const {
       artistName,
       collectionName,
@@ -107,5 +98,7 @@ export default class Album extends Component {
 }
 
 Album.propTypes = {
-  match: PropTypes.object.isRequired,
+  match: PropTypes.objectOf(
+    PropTypes.string.isRequired,
+  ).isRequired,
 };
