@@ -51,7 +51,7 @@ Para acessar e executar este projeto, siga os passos abaixo:
 2. Clone o Projeto
 
 ```bash
-git clone  TrybeTunes
+git clone https://github.com/EversonDias/Trybetunes_with_React.js_JavaScript_Tailwind.git TrybeTunes
 ```
 
 3. Entre no projeto
