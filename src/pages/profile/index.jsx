@@ -37,7 +37,7 @@ export default class Profile extends Component {
       },
       loading,
     } = this.state;
-    const defaultPerfil = "./default_perfil.svg";
+    const defaultPerfil = './default_perfil.svg';
     return (
       <div data-testid="page-profile">
         <Header />
@@ -46,26 +46,28 @@ export default class Profile extends Component {
             ? <Loading />
             : ''
         }
-        <section>
-          <picture>
-            <img
-              src={ image || defaultPerfil }
-              alt="Perfil"
-              data-testid="profile-image"
-            />
-            <Link
-              to="/profile/edit"
-            >
-              Editar perfil
-            </Link>
-          </picture>
-          <ul>
-            <li>
-              <p>Usuário</p>
+        <section className="flex flex-col items-center gap-4 bg-green-200 min-h-[100vh]">
+          <div className="avatar mt-4">
+            <picture className="w-80 rounded">
+              <img
+                src={ image || defaultPerfil }
+                alt="Perfil"
+                data-testid="profile-image"
+              />
+              <Link
+                to="/profile/edit"
+              >
+                Editar perfil
+              </Link>
+            </picture>
+          </div>
+          <ul className="mt-4 gap-4">
+            <li className="flex gap-4">
+              <p>Usuário: </p>
               {name}
             </li>
-            <li>
-              <p>Email</p>
+            <li className="flex gap-4">
+              <p>Email: </p>
               {email}
             </li>
             <li>

@@ -25,6 +25,8 @@
 
 O projeto "TrubeTunes" é parte do currículo da formação de Desenvolvedor Web da [Trybe](https://www.betrybe.com/). Nesse projeto, os alunos têm a oportunidade de aplicar seus conhecimentos no React.js, componentes, paginação, Uso de API, uso de props. 
 
+![TrubeTunes](readme/cardProject/mobile.png)
+
 # Status do Projeto
 
 > 💹 Alpha 💹

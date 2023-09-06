@@ -77,21 +77,29 @@ export default class Album extends Component {
     } = this.state;
     const isFavorite = listSongFavorite.map((song) => song.trackId);
     return (
-      <div data-testid="page-album">
+      <div
+        data-testid="page-album"
+        className="flex flex-col items-center gap-4 bg-green-300 min-h-[100vh]"
+      >
         <Header />
         <p data-testid="artist-name">{ artistName }</p>
         {loading && <Loading /> }
         <p data-testid="album-name">{ collectionName }</p>
-        {listMusic.map(({ previewUrl, trackId, trackName }, index) => (
-          index > 0 && <MusicCard
-            key={ trackId }
-            trackId={ trackId }
-            previewUrl={ previewUrl }
-            name={ trackName }
-            isFavorite={ isFavorite.includes(trackId) }
-            AddFavorite={ this.handleAddFavorite }
-          />
-        ))}
+        <div
+          className="flex flex-col gap-4 md:grid md:grid-cols-2
+         lg:grid-cols-3 2xl:grid-cols-4"
+        >
+          {listMusic.map(({ previewUrl, trackId, trackName }, index) => (
+            index > 0 && <MusicCard
+              key={ trackId }
+              trackId={ trackId }
+              previewUrl={ previewUrl }
+              name={ trackName }
+              isFavorite={ isFavorite.includes(trackId) }
+              AddFavorite={ this.handleAddFavorite }
+            />
+          ))}
+        </div>
       </div>
     );
   }

@@ -7,17 +7,17 @@ export default class CardAlbum extends Component {
     const {
       artist,
     } = this.props;
-    console.log(artist);
     return (
       <div
-        className="flex flex-col justify-center items-center gap-4"
+        className="flex flex-col justify-center items-center
+        gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
       >
         {artist.map(({ collectionId, collectionName, artworkUrl100, artistName }) => (
           <Link
             key={ collectionId }
             to={ `/album/${collectionId}` }
             data-testid={ `link-to-album-${collectionId}` }
-            className="card w-[18rem] bg-green-300 shadow-xl"
+            className="card w-[18rem] h-72 bg-green-200 shadow-xl"
           >
             <figure className="px-10 pt-10">
               <img

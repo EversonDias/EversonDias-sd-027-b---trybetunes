@@ -49,19 +49,27 @@ export default class Favorites extends Component {
     const { loading, listMusic } = this.state;
     const isFavorite = listMusic.map((song) => song.trackId);
     return (
-      <div data-testid="page-favorites">
+      <div
+        data-testid="page-favorites"
+        className="bg-green-300 flex flex-col items-center gap-4 min-h-[100vh]"
+      >
         <Header />
         {loading && <Loading /> }
-        {listMusic.map(({ previewUrl, trackId, trackName }) => (
-          <MusicCard
-            key={ trackId }
-            trackId={ trackId }
-            previewUrl={ previewUrl }
-            name={ trackName }
-            isFavorite={ isFavorite.includes(trackId) }
-            AddFavorite={ this.handleAddFavorite }
-          />
-        ))}
+        <div
+          className="flex flex-col gap-4 md:grid md:grid-cols-2
+         lg:grid-cols-3 2xl:grid-cols-4"
+        >
+          {listMusic.map(({ previewUrl, trackId, trackName }) => (
+            <MusicCard
+              key={ trackId }
+              trackId={ trackId }
+              previewUrl={ previewUrl }
+              name={ trackName }
+              isFavorite={ isFavorite.includes(trackId) }
+              AddFavorite={ this.handleAddFavorite }
+            />
+          ))}
+        </div>
       </div>
     );
   }
