@@ -59,7 +59,7 @@ export default class Search extends Component {
     const messageErro = loading === false && artist.length < ONE;
     return (
       <div>
-        <p>
+        <p className="mb-4 text-white font-medium">
           {`Resultado de álbuns de: ${fetchedArtist}`}
         </p>
         {messageErro && message}
@@ -80,24 +80,33 @@ export default class Search extends Component {
     return (
       <div data-testid="page-search">
         <Header />
-        <form>
+        <form
+          className="bg-green-400 p-4 flex justify-evenly"
+        >
           <input
             type="text"
             data-testid="search-artist-input"
             value={ input }
             onChange={ this.handleOnChangeInput }
+            className="bg-white border-none rounded-md indent-2 p-2"
           />
           <button
             data-testid="search-artist-button"
             type="button"
             disabled={ isDisabled }
             onClick={ this.handleOnClickButton }
+            className="text-white font-medium bg-green-900 p-3 rounded-md
+            active:bg-green-700"
           >
             Pesquisar
           </button>
         </form>
-        {isMessage && this.title()}
-        {loading && <Loading /> }
+        <p
+          className="bg-green-400 p-4 flex justify-evenly min-h-[80vh]"
+        >
+          {isMessage && this.title()}
+          {loading && <Loading /> }
+        </p>
       </div>
     );
   }

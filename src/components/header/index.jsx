@@ -26,12 +26,22 @@ export default class Header extends Component {
     const name = <p data-testid="header-user-name">{ userName }</p>;
     return (
       <div data-testid="header-component">
-        {loading ? <Loading /> : name}
-        <ul>
+        <p className="flex bg-green-400">
+          {loading ? <Loading /> : (
+            <spam className="flex gap-2">
+              Logado com:
+              {' '}
+              {name}
+            </spam>
+          )}
+        </p>
+        <ul className="bg-green-400 flex justify-evenly p-2">
           <li>
             <Link
               to="/search"
               data-testid="link-to-search"
+              className="bg-green-700 rounded-md p-2 text-white font-medium flex
+              align-middle shadow-xl"
             >
               Search
             </Link>
@@ -40,6 +50,8 @@ export default class Header extends Component {
             <Link
               to="/favorites"
               data-testid="link-to-favorites"
+              className="bg-green-700 rounded-md p-2 text-white font-medium flex
+              align-middle shadow-xl"
             >
               Favorites
             </Link>
@@ -48,6 +60,8 @@ export default class Header extends Component {
             <Link
               to="/profile"
               data-testid="link-to-profile"
+              className="bg-green-700 rounded-md p-2 text-white font-medium flex
+              align-middle shadow-xl"
             >
               Profile
             </Link>

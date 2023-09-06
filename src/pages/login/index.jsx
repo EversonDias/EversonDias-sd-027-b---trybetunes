@@ -55,24 +55,34 @@ export default class Login extends Component {
       <div
         data-testid="page-login"
       >
-        <form>
+        <form
+          className="bg-green-400 p-4 flex justify-evenly"
+        >
           <input
             type="text"
             id="name"
             data-testid="login-name-input"
             onChange={ this.handleUser }
+            className="bg-white border-none rounded-md indent-2 p-2"
           />
           <button
             data-testid="login-submit-button"
             type="button"
             disabled={ isAble }
             onClick={ this.handleLogin }
+            className="text-white font-medium bg-green-900 p-3 rounded-md
+            active:bg-green-700"
           >
             Entrar
           </button>
         </form>
         {loading && <Loading />}
         {authorizedLogin && <Redirect to="/search" />}
+        <div
+          className="min-h-[89vh] flex items-center"
+        >
+          <img src="home-music.svg" alt="passarinho ouvindo musica" />
+        </div>
       </div>
     );
   }
